@@ -1,4 +1,4 @@
-package pl.sda.chuckjokescollector;
+package pl.sda.chuck;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,16 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import pl.sda.chuckjokescollector.polimorfizm.A;
-import pl.sda.chuckjokescollector.polimorfizm.B;
-import pl.sda.chuckjokescollector.polimorfizm.C;
+import org.springframework.context.annotation.ComponentScan;
+import pl.sda.chuck.polimorfizm.A;
+import pl.sda.chuck.polimorfizm.C;
 
 
 import java.util.Arrays;
 
-
 @SpringBootApplication
 @Slf4j
+@ComponentScan("pl.sda")
 public class ChuckJokesCollectorApplication implements CommandLineRunner {
 
 	@Autowired
@@ -27,21 +27,20 @@ public class ChuckJokesCollectorApplication implements CommandLineRunner {
 	A a;
 
 	@Autowired
-	B b;
+	C b;
 
 	@Autowired
 	@Qualifier("d")
 	C c;
-
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChuckJokesCollectorApplication.class, args);
 	}
 
 	@Override
-	public void run(String ... args) throws Exception {
-		log.info("Hello, run with  args: ()");
+	public void run(String... args) throws Exception {
+		log.info("Hello, run with args: {}", args);
+		log.info("Before context beans definition");
 		Arrays.stream(context.getBeanDefinitionNames()).forEach(s -> log.info("Name: {}", s));
 		a.printMyName();
 		b.printMyName();
@@ -49,5 +48,4 @@ public class ChuckJokesCollectorApplication implements CommandLineRunner {
 		c.printMyName();
 		log.trace("After method on c object invocation");
 	}
-
 }
