@@ -36,8 +36,10 @@ public class JokeController {
     }
 
     @PostMapping("/joke/add")
-    public void saveJoke(@RequestBody Joke joke) {
+    public void saveJoke(@RequestBody Joke joke)
+    {
         log.info("Joke to be saved: {}", joke);
+        jokeService.save(joke);
     }
 
 

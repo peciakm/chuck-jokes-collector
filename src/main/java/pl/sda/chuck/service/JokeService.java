@@ -8,14 +8,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.sda.chuck.dto.CountResponse;
 import pl.sda.chuck.dto.Joke;
+import pl.sda.chuck.repository.JokesRepository;
 
 import java.util.Optional;
+
+import static pl.sda.chuck.mapper.JokeManualMapper.map;
 
 @Service
 @Slf4j //Will generate code private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JokeService.class)
 public class JokeService {
 
-    RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate(); //TOOO HttpClient
+
+    @Autowired
+    private JokesRepository repository;
 
     public Optional<Joke> getRandomJoke() {
         try {
@@ -59,5 +65,13 @@ public class JokeService {
         }
         log.warn("Exception has not been propagated!");
         return Optional.empty();
+    }
+
+
+    public void save(Joke joke) {
+        //Mapping between DTO and DAO
+        //Invoke save method on repository
+        //repository.save(JokeManualMapper.map(joke));
+        repository.save(map(joke));//TODO
     }
 }
