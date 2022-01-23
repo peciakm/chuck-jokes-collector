@@ -10,7 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import pl.sda.chuck.polimorfizm.A;
 import pl.sda.chuck.polimorfizm.C;
 
@@ -18,7 +20,8 @@ import pl.sda.chuck.polimorfizm.C;
 @SpringBootApplication
 @Slf4j
 @ComponentScan("pl.sda")
-//@EnableScheduling
+@EnableScheduling
+@EnableAspectJAutoProxy
 @EnableAsync
 public class ChuckJokesCollectorApplication implements CommandLineRunner {
 
