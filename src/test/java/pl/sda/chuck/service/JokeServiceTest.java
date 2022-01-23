@@ -25,7 +25,7 @@ class JokeServiceTest {
     @DisplayName("Should return 574 jokes asking for count - positive")
     void getCountJokes() {
         //when
-        Optional<CountResponse> countResponse = jokeService.getCountJoke();
+        Optional<CountResponse> countResponse = jokeService.countJokes();
         //then
         assertEquals(574, countResponse.map(CountResponse::getValue).orElseThrow());
     }

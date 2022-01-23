@@ -4,24 +4,29 @@ package pl.sda.chuck;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import pl.sda.chuck.polimorfizm.A;
 import pl.sda.chuck.polimorfizm.C;
 
 
-import java.util.Arrays;
-
 @SpringBootApplication
 @Slf4j
 @ComponentScan("pl.sda")
+//@EnableScheduling
+@EnableAsync
 public class ChuckJokesCollectorApplication implements CommandLineRunner {
 
 	@Autowired
 	ApplicationContext context;
+
+	@Value("${the.best.group.in.sda}")
+	String sampleValue;
 
 	@Autowired
 	A a;
@@ -39,13 +44,14 @@ public class ChuckJokesCollectorApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		log.info("Hello, run with args: {}", args);
-		log.info("Before context beans definition");
-		Arrays.stream(context.getBeanDefinitionNames()).forEach(s -> log.info("Name: {}", s));
-		a.printMyName();
-		b.printMyName();
-		log.trace("Before method on c object invocation");
-		c.printMyName();
-		log.trace("After method on c object invocation");
+		log.info("Sample value: {}", sampleValue);
+//        log.info("Hello, run with args: {}", args);
+//        log.info("Before context beans definition");
+//        Arrays.stream(context.getBeanDefinitionNames()).forEach(s -> log.info("Name: {}", s));
+//        a.printMyName();
+//        b.printMyName();
+//        log.trace("Before method on c object invocation");
+//        c.printMyName();
+//        log.trace("After method on c object invocation");
 	}
 }

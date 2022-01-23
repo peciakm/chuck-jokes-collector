@@ -16,6 +16,7 @@ import static pl.sda.chuck.mapper.JokeManualMapper.map;
 
 @Service
 @Slf4j //Will generate code private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JokeService.class)
+//TODO JokeService refactor -> 3 methods to one
 public class JokeService {
 
     private final RestTemplate restTemplate = new RestTemplate(); //TOOO HttpClient
@@ -52,9 +53,10 @@ public class JokeService {
         log.warn("Exception has not been propagated!");
         return Optional.empty();
     }
-    public Optional<CountResponse> getCountJoke() {
+
+    public Optional<CountResponse> countJokes() {
         try {
-            ResponseEntity<CountResponse> response = restTemplate.getForEntity("http://api.icndb.com/jokes/count",CountResponse.class);
+            ResponseEntity<CountResponse> response = restTemplate.getForEntity("http://api.icndb.com/jokes/count", CountResponse.class);
             //log trace response
             log.trace("Response: {}", response);
             return Optional.of(response)
