@@ -1,4 +1,4 @@
-package pl.sda.chuckjokescollector.polimorfizm;
+package pl.sda.chuck.polimorfizm;
 
 
 public interface C {

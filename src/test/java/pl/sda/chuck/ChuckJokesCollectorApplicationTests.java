@@ -1,29 +1,29 @@
-package pl.sda.chuckjokescollector;
+package pl.sda.chuck;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.sda.chuckjokescollector.polimorfizm.C;
+import pl.sda.chuck.polimorfizm.C;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class ChuckJokesCollectorApplicationTests {
-
-
+class ChuckJokesCollectorApplicationIntegrationTest {
 
 	@Autowired
 	C a;
 
 	@Test
-	@DisplayName("Spring context verification test - positive")
+	@DisplayName("Class A status verification - positive")
 	void contextLoadsTest() {
-		//given( optional)
+		//given [optional]
 
 		//when
 		String status = a.getStatus();
 		//then
-		Assertions.assertEquals("ACTIVE", status);
+		assertEquals("ACTIVE", status);
 	}
 
 }

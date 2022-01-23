@@ -1,4 +1,4 @@
-package pl.sda.chuckjokescollector.dto;
+package pl.sda.chuck.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

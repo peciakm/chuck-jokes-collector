@@ -1,11 +1,9 @@
-package pl.sda.chuckjokescollector.chuck.controller;
+package pl.sda.chuck.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sda.chuckjokescollector.dto.Greeting;
-
-import java.awt.*;
+import pl.sda.chuck.dto.Greeting;
 
 @RestController
 public class GreetingController {

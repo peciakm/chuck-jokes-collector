@@ -1,4 +1,4 @@
-package pl.sda.chuckjokescollector.chuck.controller;
+package pl.sda.chuck.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,17 +10,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class GreetingControllerMockMvcTest {
+class GreetingMockMvcControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    @DisplayName("/hello method validation from GreetingController - positive")
+    @DisplayName("/hello method verification from GreetingController - positive")
     void hello() throws Exception {
         //when
         String response = mockMvc
@@ -33,14 +33,14 @@ class GreetingControllerMockMvcTest {
     }
 
     @Test
-    @DisplayName("/hello/json method validation from GreetingController - positive")
+    @DisplayName("/hello/json method verification from GreetingController - positive")
     void helloJson() throws Exception {
         //when
         String response = mockMvc
-                .perform(MockMvcRequestBuilders.get("/hello/json"))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andReturn()
+                .perform(MockMvcRequestBuilders.get("/hello/json")) //run http method over application
+                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful()) //check http status on response
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)) //check content type on response
+                .andReturn() //return mvc result to validate response
                 .getResponse()
                 .getContentAsString();
         //then
