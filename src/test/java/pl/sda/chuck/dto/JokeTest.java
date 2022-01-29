@@ -13,8 +13,7 @@ import javax.validation.ValidatorFactory;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JokeTest {
 
@@ -25,20 +24,26 @@ class JokeTest {
     Gson gson = new Gson();
 
     @Test
-    public void validationTest(){
+    @DisplayName("Joke value cannot be empty - negative")
+    public void validationTest() {
         //given
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory(); //TODO
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
         Joke joke = Joke.builder()
                 .type(SUCCESS)
                 .value(JokeValue.builder()
-                        .joke("Very funny joke")
+                        .joke("")
                         .id(1)
                         .categories(List.of("nerdy"))
                         .build())
                 .build();
+        //when
         Set<ConstraintViolation<Joke>> violations = validator.validate(joke);
-        violations.forEach(System.out::println);
+        //then
+        assertFalse(violations.isEmpty());
+        violations.forEach(jokeConstraintViolation -> {
+            assertEquals("nie może być odstępem", jokeConstraintViolation.getMessage());
+        });
     }
 
     @Test
