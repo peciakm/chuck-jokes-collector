@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 
 /**
  * Sample joke below taken from: http://api.icndb.com/jokes/random
@@ -23,5 +26,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Joke {
     String type;
+    @Valid
     JokeValue value;
 }

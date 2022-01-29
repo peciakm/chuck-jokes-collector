@@ -35,6 +35,7 @@ public class JokeController {
         return jokeService.getJoke(id).orElseThrow(() -> new ExternalTechnicalException("oh nein!"));
     }
 
+    //TODO walidacja requestów
     @PostMapping("/joke/add")
     public BaseResponse saveJoke(@RequestBody Joke joke) {
         log.info("Joke to be saved: {}", joke);

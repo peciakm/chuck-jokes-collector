@@ -52,6 +52,24 @@ class JokeServiceTest {
         //then
         assertEquals(gson.fromJson(jokeToBeCompared, Joke.class), joke.orElseThrow(() -> new ExternalTechnicalException("nope")));
 //        Assertions.assertThrows(ExternalTechnicalException.class, () -> jokeService.getJoke(SUT)); // how to test exceptions
+
+        //        Assertions.assertThrows(ExternalTechnicalException.class, () -> jokeService.getJoke(SUT)); // how to test exceptions
+
+//        //Below test could be used if we want to check that we won't have any exception coming from service layer.
+//        try{
+//            jokeService.getJoke(1);
+//        } catch (Exception e){
+//            fail();
+//        }
+//
+//        //Below test could be used if we want to check that we will have any exception coming from service layer.
+//        try{
+//            jokeService.getJoke(9999);
+//            fail();
+//        } catch (Exception e){
+//            //ok
+//            //assertions
+//        }
     }
 
 }
