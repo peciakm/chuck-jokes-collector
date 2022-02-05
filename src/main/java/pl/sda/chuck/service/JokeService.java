@@ -13,6 +13,7 @@ import pl.sda.chuck.dto.CountResponse;
 import pl.sda.chuck.dto.Joke;
 import pl.sda.chuck.mapper.JokeMapper;
 import pl.sda.chuck.repository.JokesRepository;
+import pl.sda.chuck.repository.JokesH2Repository;
 
 import java.util.Optional;
 
@@ -27,6 +28,9 @@ public class JokeService {
 
     @Autowired
     private JokesRepository repository;
+
+    @Autowired
+    private JokesH2Repository h2Repository;
 
     public Optional<Joke> getRandomJoke() {
         try {
@@ -74,15 +78,24 @@ public class JokeService {
     }
 
     @LogMe
+    @CalculateInvocationTime
     public void save(Joke joke) {
         //Mapping between DTO and DAO
         //Invoke save method on repository
         repository.save(map(joke));
+        h2Repository.save(map(joke));
+
+
     }
     @LogMe
     @CalculateInvocationTime
     public void saveAlternativeWay(Joke joke) {
         JokeEntity jokeEntity = JokeMapper.INSTANCE.jokeToJokeEntity(joke);
         repository.save(jokeEntity);
+    }
+
+    public Joke getJokeFromDb(Integer externalId) {
+        JokeEntity byExternalId = h2Repository.findByExternalId(externalId);
+        return JokeMapper.INSTANCE.jokeEntityToJoke(byExternalId);
     }
 }

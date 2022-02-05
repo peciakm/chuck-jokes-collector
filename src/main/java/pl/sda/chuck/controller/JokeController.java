@@ -46,4 +46,10 @@ public class JokeController {
         jokeService.save(joke);
         return new BaseResponse(RESPONSE_STATUS.SUCCESS);
     }
+
+    @GetMapping("/joke/internal/{externalId}")
+    public Joke getJokeInternal(@PathVariable Integer externalId) {
+        log.info("Get joke with id: {}", externalId);
+        return jokeService.getJokeFromDb(externalId);
+    }
 }
