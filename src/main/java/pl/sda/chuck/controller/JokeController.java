@@ -3,6 +3,7 @@ package pl.sda.chuck.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.chuck.dao.BaseResponse;
 import pl.sda.chuck.dao.RESPONSE_STATUS;
@@ -11,8 +12,11 @@ import pl.sda.chuck.dto.Joke;
 import pl.sda.chuck.exception.ExternalTechnicalException;
 import pl.sda.chuck.service.JokeService;
 
+import javax.validation.Valid;
+
 @RestController
 @Slf4j
+@Validated
 public class JokeController {
 
     @Autowired
@@ -35,9 +39,9 @@ public class JokeController {
         return jokeService.getJoke(id).orElseThrow(() -> new ExternalTechnicalException("oh nein!"));
     }
 
-    //TODO walidacja requestów
     @PostMapping("/joke/add")
-    public BaseResponse saveJoke(@RequestBody Joke joke) {
+    @Valid
+    public BaseResponse saveJoke(@RequestBody @Valid Joke joke) {
         log.info("Joke to be saved: {}", joke);
         jokeService.save(joke);
         return new BaseResponse(RESPONSE_STATUS.SUCCESS);
