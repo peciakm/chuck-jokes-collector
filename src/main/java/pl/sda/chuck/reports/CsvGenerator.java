@@ -19,6 +19,7 @@ public class CsvGenerator implements Generator {
         try (FileWriter fileWriter = new FileWriter("jokes.csv");
              CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT)) {
 
+            //TODO
         } catch (IOException e) {
             log.error(e.getMessage());
 
